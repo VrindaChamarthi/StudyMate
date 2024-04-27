@@ -26,7 +26,7 @@ Add screenshots of your app here
 1. Clone the repository:
 
 bash
-git clone https://github.com/yourusername/studymate.git
+git clone https://github.com/likhitavarma/studymate.git
 
 
 2. Open the project in Android Studio.
