@@ -10,8 +10,11 @@ StudyMate is a mobile application designed to help students organize their acade
 - *Link Integration*: Open links directly within the app for quick reference.
 
 ## Screenshots
+![logo](https://github.com/likhitavarma/StudyMate/assets/96068821/fe17ae98-709c-4074-ab4c-4e81893ca5a4)
+![IMG-20240427-WA0059](https://github.com/likhitavarma/StudyMate/assets/96068821/d3b4f632-5972-4ef5-9d15-8c7edfe04dfb)
+![WhatsApp Image 2024-04-27 at 11 32 16_52bf2dc8](https://github.com/likhitavarma/StudyMate/assets/96068821/2ab1d12c-6da3-449e-a343-58af9dc25254)
+![WhatsApp Image 2024-04-27 at 11 32 22_3a9f2118](https://github.com/likhitavarma/StudyMate/assets/96068821/7e938466-6e2b-4ead-b8d2-2b528441613c)
 
-Add screenshots of your app here
 
 ## Getting Started
 
@@ -28,7 +31,6 @@ Add screenshots of your app here
 bash
 git clone https://github.com/likhitavarma/studymate.git
 
-
 2. Open the project in Android Studio.
 
 3. Build and run the project on your device or emulator.
@@ -39,7 +41,4 @@ git clone https://github.com/likhitavarma/studymate.git
 - Click on a subject to view its categories such as syllabus, notes, etc.
 - Click on a category to access the corresponding materials or links.
 
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to StudyMate, feel free to open an issue or submit a pull request.
 
