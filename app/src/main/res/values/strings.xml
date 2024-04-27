@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">StudyMate</string>
     <string name="title_activity_subject">SubjectActivity</string>
+    <string name="title_activity_resource">ResourceActivity</string>
+    <string name="title_activity_semester">SemesterActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

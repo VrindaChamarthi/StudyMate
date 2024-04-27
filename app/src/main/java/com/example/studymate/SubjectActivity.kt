@@ -1,16 +1,15 @@
 package com.example.studymate
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -22,38 +21,65 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.studymate.ui.theme.StudyMateTheme
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 
 class SubjectActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel = ViewModelProvider(this).get(SubjectspageViewModel::class.java)
         setContent {
             StudyMateTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color(200, 216, 230)
                 ) {
-                    subjectGrid()
+                    val subjectState = viewModel.subjects.collectAsState()
+                    val subjects = subjectState.value
+                    subjectGrid(
+                        subjects,
+                        onSubjectClicked = { subjectName ->
+                            val resourcesIntent = Intent(this, ResourceActivity::class.java)
+                            resourcesIntent.putExtra("subjectName", subjectName)
+                            startActivity(resourcesIntent)
+                        }
+                    )
                 }
             }
         }
     }
 }
+
+@Composable
+fun LogosImage() {
+    Image(painter = painterResource(id = R.drawable.quillff_p), contentDescription = null,Modifier.size(40.dp), alignment = Alignment.TopEnd)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Subjectitem(
     sub:String,
-    imageUrl:String
+    imageUrl:String,
+    onSubjectClicked: (String) -> Unit
 ){
 
     Card(
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(8.dp),
+        onClick = {
+            onSubjectClicked(sub)
+        }
     ){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -71,41 +97,35 @@ fun Subjectitem(
             }
     }
 }
-fun generateSubjects():List<Subjects>{
-    return listOf(
-        Subjects("DAA","https://i.imgur.com/If1JaaE.jpeg"),
-        Subjects(
-            "CD",
-            "https://i.imgur.com/ydKtsHF.png"
-        ),
-        Subjects("FIOT",  "https://i.imgur.com/P3aoXTc.png"),
-        Subjects(
-            "ML",
-            "https://i.imgur.com/upam8g1.png"
-        ),
-        Subjects(
-            "SL",
-            "https://i.imgur.com/OhEHsyU.png"
-        )
-    )
-}
-
 
 @Composable
-fun subjectGrid(){
-    val subs = generateSubjects()
+fun subjectGrid(subjects: List<Subjects>, onSubjectClicked: (String) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        LogosImage()
+        Text(
+            text = "StudyMate.",
+            style = TextStyle(fontFamily = FontFamily.Cursive),
+            textAlign = TextAlign.End,
+            fontSize = 30.sp
+        )
+        Text(
+            text = "\nSubjects",
+            textAlign = TextAlign.Left,
+            style = TextStyle(fontFamily = FontFamily.Monospace),
+            fontSize = 25.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+        )
 
-    var subjectname by remember{
-        mutableStateOf(true)
-    }
-
-    val viewModel = SubjectspageViewModel()
-    val subjectState = viewModel.Resource.collectAsState()
-    val subjects = subjectState.value
-
-    LazyColumn() {
-        items(subs){ subs ->
-            Subjectitem(subs.sub,subs.imageUrl)
+        LazyColumn {
+            items(subjects) { subs ->
+                Subjectitem(subs.sub, subs.imageUrl, onSubjectClicked)
+            }
         }
     }
 }

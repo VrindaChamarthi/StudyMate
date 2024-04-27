@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SubjectspageViewModel : ViewModel() {
+class SemesterViewModel : ViewModel() {
 
 
-    private var _subjects = MutableStateFlow<List<Subjects>>(emptyList())
-    val subjects: StateFlow<List<Subjects>> = _subjects
+    private var _semesters = MutableStateFlow<List<Semesters>>(emptyList())
+    val semesters: StateFlow<List<Semesters>> = _semesters
 
     init {
         fetchSubjects()
@@ -18,9 +18,9 @@ class SubjectspageViewModel : ViewModel() {
 
     private fun fetchSubjects(){
         viewModelScope.launch {
-            val repo = subjectRepository()
-            val response = repo.getSubjects()
-            _subjects.value = response
+            val repo = SemesterRepository()
+            val response = repo.getSemesters()
+            _semesters.value = response
         }
     }
 }

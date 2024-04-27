@@ -15,9 +15,9 @@
         android:theme="@style/Theme.StudyMate"
         tools:targetApi="31">
         <activity
-            android:name=".SubjectActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_subject"
+            android:label="@string/title_activity_main"
             android:theme="@style/Theme.StudyMate">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +26,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".SemesterActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_semester"
+            android:theme="@style/Theme.StudyMate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ResourceActivity"
+            android:exported="true"
+            android:label="@string/title_activity_resource"
+            android:theme="@style/Theme.StudyMate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SubjectActivity"
+            android:exported="true"
+            android:label="@string/title_activity_subject"
             android:theme="@style/Theme.StudyMate">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
